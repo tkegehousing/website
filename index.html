@@ -3,18 +3,421 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TKE GE Housing</title>
+  <title>Gamma Epsilon of Tau Kappa Epsilon, Inc.</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #222;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 28px 48px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    header img.crest {
+      height: 68px;
+      width: auto;
+    }
+
+    header div h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #5c1a1a;
+    }
+
+    header div p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Contact Us button in header */
+    .header-contact-btn {
+      margin-left: auto;
+      background: #5c1a1a;
+      color: #fff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .header-contact-btn:hover { background: #7a2020; }
+
+    /* Modal overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #fff;
+      border-radius: 8px;
+      padding: 36px 40px;
+      width: 440px;
+      max-width: 95vw;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+
+    .modal h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #5c1a1a;
+      margin-bottom: 18px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: #888;
+      line-height: 1;
+    }
+    .modal-close:hover { color: #222; }
+
+    /* Two-column layout */
+    .layout {
+      display: flex;
+      height: calc(100vh - 110px);
+      overflow: hidden;
+    }
+
+    /* Left panel — image + form */
+    .left-panel {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid #e0e0e0;
+      overflow-y: auto;
+      background: rgb(240, 223, 202);
+    }
+
+    .left-panel img.workweek {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+      background: rgb(240, 223, 202);
+      padding-bottom: 24px;
+    }
+
+    .contact-section {
+      padding: 36px 40px;
+    }
+
+    .contact-section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #5c1a1a;
+      margin-bottom: 18px;
+    }
+
+    form { max-width: 460px; }
+
+    form label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 4px;
+      margin-top: 14px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.92rem;
+      font-family: inherit;
+    }
+
+    form textarea { height: 110px; resize: vertical; }
+
+    form button {
+      margin-top: 18px;
+      background: #5c1a1a;
+      color: #fff;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 4px;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    form button:hover { background: #7a2020; }
+
+    /* Right panel — scrollable task list */
+    .right-panel {
+      width: 30%;
+      overflow-y: auto;
+      padding: 28px 24px;
+    }
+
+    .right-panel h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #5c1a1a;
+      margin-bottom: 20px;
+    }
+
+    .month {
+      margin-bottom: 26px;
+    }
+
+    .month h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .month ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .month ul li {
+      padding: 3px 0 3px 18px;
+      position: relative;
+      font-size: 0.82rem;
+      color: #333;
+    }
+
+    .month ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #5c1a1a;
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    .category {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #bbb;
+      margin: 10px 0 3px 18px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello World</h1>
-  <p>tkegehousing.org — coming soon.</p>
 
-  <h2>Contact Us</h2>
-  <form action="https://formspree.io/f/placeholder" method="POST">
-    <label>Name<br><input type="text" name="name"></label><br><br>
-    <label>Email<br><input type="email" name="_replyto"></label><br><br>
-    <label>Message<br><textarea name="message"></textarea></label><br><br>
-    <button type="submit">Send</button>
-  </form>
+<header>
+  <img class="crest" src="logo.jpg" alt="TKE Crest">
+  <div>
+    <h1>Gamma Epsilon of Tau Kappa Epsilon, Inc.</h1>
+    <p>1661 Tibbits Avenue &bull; Troy, NY &bull; 12180</p>
+  </div>
+  <button class="header-contact-btn" onclick="document.getElementById('contactModal').classList.add('open')">Contact Us</button>
+</header>
+
+<!-- Contact Modal -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('contactModal').classList.remove('open')">&times;</button>
+    <h2>Contact Us</h2>
+    <form action="https://formspree.io/f/mbgrwkyq" method="POST">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="_replyto" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- Left: Work Week image + contact form -->
+  <!-- Left: Work Week image -->
+  <div class="left-panel">
+    <img class="workweek" src="workweek.png" alt="Work Week 2026">
+  </div>
+
+  <!-- Right: scrollable completed tasks -->
+  <div class="right-panel">
+    <h2>Completed Tasks — Past 12 Months</h2>
+
+    <div class="month">
+      <h3>July 2026</h3>
+      <div class="category">Work Week</div>
+      <ul>
+        <li>Approved budget for Work Week projects</li>
+        <li>Coordinated projects with Jared &amp; Evan</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>June 2026</h3>
+      <div class="category">Finances</div>
+      <ul>
+        <li>Reimbursement for Matterport scan</li>
+      </ul>
+      <div class="category">Operations</div>
+      <ul>
+        <li>Scheduled alumni council meeting in Charlotte, NC</li>
+        <li>Upper Crust contract renewal</li>
+        <li>Increased property insurance coverage to $2M</li>
+      </ul>
+      <div class="category">Grand Summit</div>
+      <ul>
+        <li>Secured donations for Conclave registration &amp; airfare</li>
+        <li>Group expenses paid by Housing Corporation</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>May 2026</h3>
+      <div class="category">Property Management</div>
+      <ul>
+        <li>Designer feedback for ground floor updates</li>
+        <li>Bids for summer renovation projects</li>
+        <li>Repaired laundry machine</li>
+        <li>Repaired kitchen sanitizer</li>
+        <li>Sent checkout requirements to chapter</li>
+      </ul>
+      <div class="category">Operations</div>
+      <ul>
+        <li>Executed summer housing agreements</li>
+        <li>Recruited additional board members</li>
+        <li>Discussed LIA compensation with chapter officers</li>
+      </ul>
+      <div class="category">Finances</div>
+      <ul>
+        <li>Closed Bank of America accounts</li>
+        <li>Prepared Fall '26 &amp; Spring '27 residency roster</li>
+        <li>Collected $3,800 in past due payments</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>April 2026</h3>
+      <div class="category">Property Management</div>
+      <ul>
+        <li>Hired plumber for basement drain</li>
+        <li>Matterport scan completed (ground floor)</li>
+        <li>Property walkthrough video and photos</li>
+      </ul>
+      <div class="category">Finances</div>
+      <ul>
+        <li>Submitted residency rosters to RPI Bursar</li>
+        <li>Established room rates for all terms</li>
+        <li>Fall '25 chapter financial review</li>
+        <li>Transferred internet billing to Chase</li>
+      </ul>
+      <div class="category">Communications</div>
+      <ul>
+        <li>Chapter Officer Jamboree</li>
+        <li>Board of Advisors Summit</li>
+        <li>Intro meeting with chapter officers re: housing agreements</li>
+        <li>Board vote re: Dan O.</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>March 2026</h3>
+      <ul>
+        <li>Insurance inspection completed</li>
+        <li>Summarized RPI Accreditation Program requirements</li>
+        <li>Updated Spring '26 residency roster</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>February 2026</h3>
+      <ul>
+        <li>Updated Spring '26 residency roster</li>
+        <li>Signed Chapter Housing Agreement</li>
+        <li>Reviewed property manager compensation package</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>December 2025</h3>
+      <ul>
+        <li>Dishwasher purchase &amp; installation</li>
+        <li>Set up USPS forwarding; notified vendors of new address</li>
+        <li>Directed RPI Bursar to new HC accounts</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>November 2025</h3>
+      <ul>
+        <li>Chapter letter re: rent unchanged, utilities shifted to chapter</li>
+        <li>Drafted Chapter Housing Agreement</li>
+        <li>Discussed security improvements</li>
+        <li>Negotiated chapter paying school year utilities</li>
+        <li>Purchased and installed new dishwasher</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>October 2025</h3>
+      <ul>
+        <li>Set rent rates effective Spring '26</li>
+        <li>Conference call with chapter re: rent vs. utilities</li>
+        <li>Migrated to QuickBooks Online</li>
+        <li>Hired quarterly bookkeeper and accountant</li>
+        <li>Set up traveling mailbox</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>September 2025</h3>
+      <ul>
+        <li>Vote on motions re: independence and financial controls</li>
+        <li>Published video house tour and Work Week postcard</li>
+        <li>Confirmed HC legal agent name and address</li>
+        <li>Established property manager bid requirements</li>
+      </ul>
+    </div>
+
+    <div class="month">
+      <h3>August 2025</h3>
+      <ul>
+        <li>Presented HC Motions re: independence and financial controls</li>
+        <li>Managed Work Week repairs, upgrades &amp; purchases</li>
+        <li>Established standalone bank accounts with proper signatories</li>
+        <li>LVT flooring installed in Room 11</li>
+        <li>Signed agreement with property manager</li>
+        <li>Presented housing agreements to chapter officers</li>
+      </ul>
+    </div>
+
+  </div><!-- end right-panel -->
+
+</div><!-- end layout -->
+
 </body>
 </html>
